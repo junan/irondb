@@ -21,3 +21,8 @@ irondb.snapshot.json
 
 # Project plan (local working doc)
 plan.md
+
+
+# Added by cargo
+
+/target
