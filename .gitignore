@@ -1,0 +1,23 @@
+# Rust
+/target/
+**/*.rs.bk
+*.pdb
+
+# Snapshot / runtime data
+*.snapshot.json
+irondb.snapshot.json
+
+# IDE / editor
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Local env
+.env
+.env.*
+
+# Project plan (local working doc)
+plan.md
