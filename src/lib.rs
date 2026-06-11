@@ -5,4 +5,5 @@ pub mod error;
 pub mod persistence;
 pub mod protocol;
 pub mod server;
+pub mod stats;
 pub mod store;

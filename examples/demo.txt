@@ -1,0 +1,14 @@
+PING
+SET name Junan
+GET name
+EXISTS name
+EXPIRE name 30
+TTL name
+SETEX session:1 60 abc123
+GET session:1
+INFO
+SAVE
+DEL name
+GET name
+LOAD
+GET name

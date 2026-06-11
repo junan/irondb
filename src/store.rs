@@ -1,5 +1,7 @@
 use std::collections::HashMap;
-use std::sync::{Arc, RwLock};
+use std::sync::Arc;
+
+use tokio::sync::RwLock;
 
 use chrono::{DateTime, Duration, Utc};
 use serde::{Deserialize, Serialize};
@@ -13,6 +15,7 @@ pub struct Entry {
 #[derive(Debug, Default)]
 pub struct Store {
     data: HashMap<String, Entry>,
+    lazy_expired_count: u64,
 }
 
 pub type SharedStore = Arc<RwLock<Store>>;
@@ -121,6 +124,12 @@ impl Store {
         self.data = entries;
     }
 
+    pub fn take_lazy_expired_count(&mut self) -> u64 {
+        let count = self.lazy_expired_count;
+        self.lazy_expired_count = 0;
+        count
+    }
+
     fn remove_if_expired(&mut self, key: &str, now: DateTime<Utc>) -> bool {
         let expired = self
             .data
@@ -129,6 +138,7 @@ impl Store {
 
         if expired {
             self.data.remove(key);
+            self.lazy_expired_count += 1;
         }
 
         expired
